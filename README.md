@@ -1,5 +1,142 @@
-# Euron 3기 예습·복습 과제 제출
+## EURON 3기 - 1주차
+<details>
+<summary>CV</summary>
+<div markdown="1">       
 
-### ▶ [Computer Vision](https://github.com/Ewha-Euron/2022-2-Euron-CV)
-### ▶ [Natural Language Processing](https://github.com/Ewha-Euron/2022-2-Euron-NLP)
-### ▶ [Data Science](https://github.com/Ewha-Euron/2022-2-Euron-DS)
+<br />  
+  
+| 주차 | 내용         | 발표자                       | 발표자료 |
+| ---- | ------------ | ---------------------------- | -------- |
+| 1    | cs231n 1주차 |  | [📚]()    |
+
+  
+## Assignment
+### 📍 예습과제 (~3/7)
+1️⃣ CS231N 1강을 수강하고, 요약 및 정리한 내용을 깃허브에 업로드
+
+2️⃣ (선택) 질문 사항이나 공유하고 싶은 내용 깃허브 issue에 추가
+- 과제 제출 방법
+    - 레포: (origin) Ewha-Euron/2022-1-Euron-CV
+    - issue 추가
+        - 제목: [n주차] 질문 있습니다/~ 내용 공유합니다.
+        - label:
+            - 강의 내용 중 이해가 잘 되지 않는 부분 `question`
+            - 강의에는 없지만 추가로 궁금한 사항 `question`
+            - 강의에는 없지만 추가로 공유하고 싶은 내용 `share`
+  
+### 📍 복습과제 (~3/14)
+
+
+  
+  
+  
+## Submission
+  
+> 모든 파일을 업로드하신 후 해당 `Week_1`  branch에서  `pull request` 를 진행해주세요.
+  
+- 과제 제출 방법
+    - 레포: (origin) username/2022-1-Euron-Study-Assignments
+    - 브랜치: `Week_1`
+    - 해당 주차 브랜치에 과제 업로드하고 Pull Request, 이때 label은 `CV` , `예습과제` 또는 `복습과제`
+  
+* Preview
+  - **8월 29일**까지 제출합니다.
+  
+* Review
+  - **9월 5일**까지 제출합니다.
+   
+## Extra-Credit
+
+* https://github.com/deeplearningzerotoall
+
+  * 위 링크에 들어가 본인이 사용하는 프레임워크에 맞게 repository를 선택해 주세요.
+  * 본인의 EURON repository의 Week_1 branch (해당 readme가 있는 branch)에 1에서 택한 repository를  `git clone` 합니다.
+
+  * `lab-01-basics.ipynb` 을 진행해주세요. 
+
+  
+</div>
+</details>
+
+<details>
+<summary>NLP</summary>
+<div markdown="1">
+  
+<br />  
+  
+| 주차 | 내용         | 발표자                       | 발표자료 |
+| ---- | ------------ | ---------------------------- | -------- |
+| 1    | cs224n 1주차 |  | [📚]()    |
+
+
+
+## Assignment
+
+> 매주 예습 과제와 복습 과제가 주어집니다.
+  
+
+
+
+  
+  </br>  
+  
+
+  
+  
+
+## Submission
+  
+> 모든 파일을 업로드하신 후 해당 `Week_1`  branch에서  `pull request` 를 진행해주세요.
+  
+- 과제 제출 방법
+    - 레포: (origin) username/2022-1-Euron-Study-Assignments
+    - 브랜치: Week_1
+    - 해당 주차 브랜치에 과제 업로드하고 Pull Request, 이때 label은 `NLP`, `예습과제` 또는 `복습과제`
+
+* Preview ✔
+  - **8월 29일**까지 제출합니다.
+  
+* Review ♾
+  - **9월 5일**까지 제출합니다.
+  
+
+</div>
+</details>
+
+<details>
+<summary>DA</summary>
+<div markdown="1">
+  
+<br />  
+  
+| 주차 | 내용         | 발표자                       | 발표자료 |
+| ---- | ------------ | ---------------------------- | -------- |
+| 1    | 완벽가이드 1~3장 | 최하경, 임나영 | [📚]()    |
+
+
+
+## Assignment
+
+> 매주 예습 과제와 복습 과제가 주어집니다. 
+  
+* Preview
+  - 파이썬 머신러닝 완벽가이드 1~3장을 pdf 형식으로 정리합니다. 또한 주피터나 구글 코랩으로 실행한 실습 코드들을 ipynb 형식으로 정리합니다.
+  
+* Review
+  - 1주차 복습과제는 없습니다.
+
+  
+  
+## Submission
+  
+> 모든 파일을 업로드하신 후 해당 `Week_1`  branch에서  `pull request` 를 진행해주세요.
+
+* Preview
+  - **8월 29일**까지 제출합니다.
+  
+* Review
+  - 1주차 복습과제는 없습니다.
+  
+
+</div>
+</details>
