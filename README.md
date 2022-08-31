@@ -68,13 +68,7 @@
 
   
 ### 📍 복습과제
-  1️⃣ (필수) CS224N Assignment 1 문제 Q1.1 ~ Q1.5 풀어서 제출 
-  
-  * [CS224N 2021 Assignment 1](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1214/assignments/a1.zip)
- 
-  2️⃣ (선택) 리딩자료를 읽고, 후기(내용 요약, 실습 내용 등) 를 정리합니다. (내용은 1번 노트북에 마크다운으로 함께 정리) 
-    
-  * [Word2Vec Tutorial - The Skip-Gram Model](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/)
+  - 1주차 복습과제는 없습니다.
 
   
   
