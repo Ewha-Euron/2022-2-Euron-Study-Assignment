@@ -11,7 +11,7 @@
 
 ## Assignment
 ### 📍 예습과제 
-
+- cs231n 2주차 강의를 듣고 Summary를 작성합니다.
 ### 예습과제 제출 방법
   
 > 해당 파일을 `master` branch에 업로드하신 후 해당 `master`  branch에서  `pull request` 를 진행해주세요.
@@ -23,7 +23,33 @@
  
 ### 📍 복습과제
 
+### 1️⃣ Software Setup
 
+- Local Environment (Jupyter Notebook) 가 아닌 `Google Colab` 을 이용해주세요. ( 미리 설치하실 것은 따로 없으며, Assignment 절차를 따라주시면 됩니다. )
+- [https://cs231n.github.io/setup-instructions/](https://cs231n.github.io/setup-instructions/) 을 따라 'Working remotely on Google Colaboratory' 까지 해주시면 됩니다.
+
+![https://user-images.githubusercontent.com/49134038/111903240-92508a00-8a84-11eb-922c-eca1b010672d.png](https://user-images.githubusercontent.com/79077316/156975127-4b394718-0e70-45d0-bae1-a4c7d46e9b90.png)
+
+![https://user-images.githubusercontent.com/49134038/111903237-9086c680-8a84-11eb-8652-19a7668d106a.png](https://user-images.githubusercontent.com/79077316/156975150-2f6ca017-c87f-4880-bffc-d2d859d2c625.png)
+
+2️⃣ [https://cs231n.github.io/assignments2021/assignment1/](https://cs231n.github.io/assignments2021/assignment1/) 을 따라 진행해주세요.
+
+- 과제 파일을 다운로드 받아주세요.
+- 이후 아래의 과정에서 2번까지 진행해주세요. (colab에 구글 드라이브의 assignment1 폴더 마운팅)
+
+![Untitled](https://user-images.githubusercontent.com/79077316/156975158-a4469d82-8e64-46d4-91ea-9bf7564a4c65.png)
+
+1. 다음주 과제로 사용할 dataset을 미리 다운받기 위해, /assignment1/knn.ipynb의 첫 번째 cell을 실행해주세요.
+    
+    ![Untitled](https://user-images.githubusercontent.com/79077316/156975189-6dc60a1a-f642-4116-afc1-2f284d33a2a5.png)
+    
+    ✅ assignment1의 dataset을 다운받은 화면을 캡쳐해서 제출해주세요. 아래의 결과가 포함되면 됩니다.
+    
+    ![Untitled](https://user-images.githubusercontent.com/79077316/156975202-a4fce426-a987-45d6-9c19-5783a49e4449.png)
+    
+2. [https://cs231n.github.io/python-numpy-tutorial/](https://cs231n.github.io/python-numpy-tutorial/) 을 완료해주세요.
+    
+    ✅ `colab-tutorial.ipynb` 의 모든 cell이 실행된 파일을 제출해주세요.
   
 ### 복습과제 제출 방법
   
