@@ -53,11 +53,11 @@
   
 ### 복습과제 제출 방법
   
-> 해당 파일을 `Week_2` branch에 업로드하신 후 해당 `Week_2`  branch에서  `pull request` 를 진행해주세요.
+> 해당 파일을 `Week_3` branch에 업로드하신 후 해당 `Week_3`  branch에서  `pull request` 를 진행해주세요.
   
 - 과제 제출 방법
     - 레포: (origin) username/2022-2-Euron-Study-Assignment
-    - 브랜치: `Week_2`
+    - 브랜치: `Week_3`
     - 해당 주차 브랜치에 과제 업로드하고 Pull Request, 이때 label은 `CV` , `복습과제`
   
 ## Due
@@ -102,11 +102,11 @@
   
 ### 복습과제 제출 방법
   
-> 해당 파일을 `Week_2` branch에 업로드하신 후 해당 `Week_2`  branch에서  `pull request` 를 진행해주세요.
+> 해당 파일을 `Week_3` branch에 업로드하신 후 해당 `Week_3`  branch에서  `pull request` 를 진행해주세요.
   
 - 과제 제출 방법
     - 레포: (origin) username/2022-2-Euron-Study-Assignment
-    - 브랜치: `Week_2`
+    - 브랜치: `Week_3`
     - 해당 주차 브랜치에 과제 업로드하고 Pull Request, 이때 label은 `NLP` , `복습과제`
 
 
@@ -149,7 +149,7 @@
   
 ### 복습과제 제출 방법
   
-> 해당 파일을 `Week_3` branch에 업로드하신 후 해당 `master`  branch에서  `pull request` 를 진행해주세요.
+> 해당 파일을 `Week_3` branch에 업로드하신 후 해당 `Week_3`  branch에서  `pull request` 를 진행해주세요.
   
 - 과제 제출 방법
     - 레포: (origin) username/2022-2-Euron-Study-Assignments
