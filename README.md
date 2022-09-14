@@ -74,8 +74,8 @@
 ### 📍 복습과제
   1️⃣ CS224N Assignment2 문제 2 Coding: Implementing word2vec의 (a)만 풀어서 제출
  
-  - [CS224N 2019 Assignment2 문제](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1214/assignments/a2.pdf)
-  - [CS224N 2019 Assignment2 코드](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1214/assignments/a2.zip) 
+  - [CS224N 2021 Assignment2 문제](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1214/assignments/a2.pdf)
+  - [CS224N 2021 Assignment2 코드](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1214/assignments/a2.zip) 
 
   
 ### 복습과제 제출 방법
@@ -87,7 +87,12 @@
     - 브랜치: `Week_4`
     - 해당 주차 브랜치에 과제 업로드하고 Pull Request, 이때 label은 `NLP` , `복습과제`
 
+## **Due**
 
+- 4주차 예습과제
+    - **9월 19일**까지 제출합니다.
+- 3주차 복습과제
+    - **9월 19일**까지 제출합니다.
 
 </div>
 </details>
