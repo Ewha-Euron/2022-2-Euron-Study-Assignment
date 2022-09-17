@@ -88,7 +88,7 @@
   
 ### 복습과제 제출 방법
   
-> 해당 파일을 `Week_5` branch에 업로드하신 후 해당 `Week_4`  branch에서  `pull request` 를 진행해주세요.
+> 해당 파일을 `Week_5` branch에 업로드하신 후 해당 `Week_5`  branch에서  `pull request` 를 진행해주세요.
   
 - 과제 제출 방법
     - 레포: (origin) username/2022-2-Euron-Study-Assignments
