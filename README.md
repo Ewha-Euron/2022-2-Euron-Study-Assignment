@@ -52,7 +52,9 @@
 </details>
 
 
-### ▶ [Natural Language Processing](https://github.com/Ewha-Euron/2022-2-Euron-NLP)
+<details>
+<summary>NLP</summary>
+<div markdown="1">       
 
   | 주차 | 내용             | 발표자                               | 발표자료 |
 | ---- | ---------------- | ------------------------------------ | -------- |
