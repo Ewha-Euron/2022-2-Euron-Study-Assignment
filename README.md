@@ -77,7 +77,7 @@
     
  
 ### 📍 복습과제
-  1️⃣ CS224N Assignment2 문제 2 Coding: Implementing word2vec의 (a)만 풀어서 제출
+  1️⃣  CS224N Assignment2 문제 Q2의 (b), (c) 풀어서 제출 
  
   - [CS224N 2021 Assignment2 문제](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1214/assignments/a2.pdf)
   - [CS224N 2021 Assignment2 코드](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1214/assignments/a2.zip) 
