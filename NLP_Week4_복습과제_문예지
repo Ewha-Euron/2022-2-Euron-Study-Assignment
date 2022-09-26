@@ -1,0 +1,31 @@
+import numpy as np
+import random
+
+from utils.gradcheck import gradcheck_naive
+from utils.utils import normalizeRows, softmax
+
+def sigmoid(x):
+    """
+    Compute the sigmoid function for the input here.
+    Arguments:
+    x -- A scalar or numpy array.
+    Return:
+    s -- sigmoid(x)
+    """
+
+    ### YOUR CODE HERE
+    s = 1./(1. + np.exp(-x))
+    ### END YOUR CODE
+
+    return s
+
+def getNegativeSamples(outsideWordIdx, dataset, K):
+    """ Samples K indexes which are not the outsideWordIdx """
+
+    negSampleWordIndices = [None] * K
+    for k in range(K):
+        newidx = dataset.sampleTokenIdx()
+        while newidx == outsideWordIdx:
+            newidx = dataset.sampleTokenIdx()
+        negSampleWordIndices[k] = newidx
+    return negSampleWordIndices
