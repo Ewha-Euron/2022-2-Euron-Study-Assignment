@@ -48,6 +48,57 @@
 </div>
 </details>
 
+
+<details>
+<summary>NLP</summary>
+<div markdown="1">       
+
+  | 주차 | 내용             | 발표자                               | 발표자료 |
+| ---- | ---------------- | ------------------------------------ | -------- |
+|  6주차   |   cs224n 6강   |  문예지, 송혜준   | [📚]()    |
+
+## Assignment
+### 📍 예습과제 
+
+1️⃣ CS224N 6강을 수강하고, 요약 및 정리한 내용을 깃허브에 업로드  
+2️⃣ (선택) 질문 사항이나 공유하고 싶은 내용 `Ewha-Euron/2022-02-Euron-NLP` issue에 추가
+
+### 예습과제 제출 방법
+  
+> 해당 파일을 `master` branch에 업로드하신 후 해당 `master`  branch에서  `pull request` 를 진행해주세요.
+  
+- 과제 제출 방법
+    - 레포: (origin) username/2022-2-Euron-Study-Assignment
+    - 브랜치: `master`
+    - 해당 주차 브랜치에 과제 업로드하고 Pull Request, 이때 label은 `NLP` , `예습과제`
+    
+ 
+### 📍 복습과제
+  1️⃣  CS224N Assignment2 문제 Q2의 (b), (c) 풀어서 제출 
+ 
+  - [CS224N 2021 Assignment2 문제](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1214/assignments/a2.pdf)
+  - [CS224N 2021 Assignment2 코드](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1214/assignments/a2.zip) 
+
+  
+### 복습과제 제출 방법
+  
+> 해당 파일을 `Week_6` branch에 업로드하신 후 해당 `Week_6`  branch에서  `pull request` 를 진행해주세요.
+  
+- 과제 제출 방법
+    - 레포: (origin) username/2022-2-Euron-Study-Assignment
+    - 브랜치: `Week_6`
+    - 해당 주차 브랜치에 과제 업로드하고 Pull Request, 이때 label은 `NLP` , `복습과제`
+
+## **Due**
+
+- 6주차 예습과제
+    - **10월 3일**까지 제출합니다.
+- 5주차 복습과제
+    - **10월 3일**까지 제출합니다.
+
+</div>
+</details>
+
 <details>
 <summary>DS</summary>
 <div markdown="1">       
