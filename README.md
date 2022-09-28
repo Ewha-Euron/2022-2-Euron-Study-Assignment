@@ -38,11 +38,11 @@
   
 ### 복습과제 제출 방법
   
-> 해당 파일을 `Week_6` branch에 업로드하신 후 해당 `Week_6`  branch에서  `pull request` 를 진행해주세요.
+> 해당 파일을 `Week_7` branch에 업로드하신 후 해당 `Week_6`  branch에서  `pull request` 를 진행해주세요.
   
 - 과제 제출 방법
     - 레포: (origin) username/2022-2-Euron-Study-Assignments
-    - 브랜치: `Week_6`
+    - 브랜치: `Week_7`
     - 해당 주차 브랜치에 과제 업로드하고 Pull Request, 이때 label은 `DS` , `복습과제`
 
   
