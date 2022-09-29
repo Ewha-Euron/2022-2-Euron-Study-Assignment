@@ -74,10 +74,9 @@
     
  
 ### 📍 복습과제
-  1️⃣  CS224N Assignment2 문제 Q2의 (b), (c) 풀어서 제출 
- 
-  - [CS224N 2021 Assignment2 문제](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1214/assignments/a2.pdf)
-  - [CS224N 2021 Assignment2 코드](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1214/assignments/a2.zip) 
+  1️⃣  아래 구글 드라이브에서 ipynb 파일을 다운받아 필사 과제를 진행해주시면 됩니다. 
+  
+  - [Glove 모델 실습, NER task 실습, Dependency Parsing task 실습](https://colab.research.google.com/drive/1vb1qpw7zMmpoLHTDuCSbWbwRQGXjIA-E?usp=sharing)
 
   
 ### 복습과제 제출 방법
