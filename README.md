@@ -40,8 +40,6 @@
 📍 복습과제
   - **10월 10일**까지 제출합니다.
 
-</div>
-</details>
 
 <details>
 <summary>DS</summary>
