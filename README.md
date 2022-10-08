@@ -1,7 +1,5 @@
 # Euron 3기 예습·복습 과제 제출
 
-### ▶ [Computer Vision](https://github.com/Ewha-Euron/2022-2-Euron-CV)
-
 ## EURON 3기 - 스터디팀 8주차
 <details>
 <summary>CV</summary>
