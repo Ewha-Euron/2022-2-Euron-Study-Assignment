@@ -1,0 +1,672 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Moonyaeji/2022-2-Euron-Study-Assignment/blob/master/week5_%EB%AC%B8%EC%98%88%EC%A7%80_hw.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "QhUHfXkPAORh"
+      },
+      "source": [
+        "📌 week5 내용 주차에 해당되는 과제는 Glove 모델 실습, NER task 실습, Dependency Parsing task 실습으로 구성되어 있습니다. (**참고** : **제출은 week6 branch 복습과제로!**)\n",
+        "\n",
+        "📌 위키독스의 딥러닝을 이용한 자연어 처리 입문 교재 실습, 캐글 노트북 등의 자료로 구성되어있는 과제입니다. \n",
+        "\n",
+        "📌 안내된 링크에 맞추어 **직접 코드를 따라 치면서 (필사)** 해당 nlp task 의 기본적인 라이브러리와 메서드를 숙지해보시면 좋을 것 같습니다😊 필수라고 체크한 부분은 과제에 반드시 포함시켜주시고, 선택으로 체크한 부분은 자율적으로 스터디 하시면 됩니다.\n",
+        "\n",
+        "📌 궁금한 사항은 깃허브 이슈나, 카톡방, 세션 발표 시작 이전 시간 등을 활용하여 자유롭게 공유해주세요!"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "3XjTSbcxBB6o",
+        "outputId": "b26abeed-235d-42a3-c6a4-c5cb4e902c65"
+      },
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "[nltk_data] Downloading package punkt to /root/nltk_data...\n",
+            "[nltk_data]   Unzipping tokenizers/punkt.zip.\n",
+            "[nltk_data] Downloading package averaged_perceptron_tagger to\n",
+            "[nltk_data]     /root/nltk_data...\n",
+            "[nltk_data]   Unzipping taggers/averaged_perceptron_tagger.zip.\n",
+            "[nltk_data] Downloading package maxent_ne_chunker to\n",
+            "[nltk_data]     /root/nltk_data...\n",
+            "[nltk_data]   Unzipping chunkers/maxent_ne_chunker.zip.\n",
+            "[nltk_data] Downloading package words to /root/nltk_data...\n",
+            "[nltk_data]   Unzipping corpora/words.zip.\n"
+          ]
+        },
+        {
+          "data": {
+            "text/plain": [
+              "True"
+            ]
+          },
+          "execution_count": 1,
+          "metadata": {},
+          "output_type": "execute_result"
+        }
+      ],
+      "source": [
+        "import nltk\n",
+        "# nltk colab 환경에서 실행시 필요한 코드입니다. \n",
+        "nltk.download('punkt')\n",
+        "nltk.download('averaged_perceptron_tagger')\n",
+        "nltk.download('maxent_ne_chunker')\n",
+        "nltk.download('words')"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "-vPZn15zBHIv"
+      },
+      "source": [
+        "### 1️⃣ **Glove**\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "P11biHcUuBaH"
+      },
+      "source": [
+        "👀 **내용 복습** \n",
+        "* 스탠포드 대학에서 개발한 카운트 기반과 예측 기반을 모두 사용하는 단어 임베딩 방법론 \n",
+        "* word2vec 의 단점을 보완해서 나온 모델 \n",
+        "* glove model 의 **input 은 반드시 동시등장행렬 형태**여야 한다 ⭐\n",
+        "\n",
+        "![1](https://www.dropbox.com/s/nz0ji4yzre56ifv/word_presentation.png?raw=1) \n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "🤔 한국어 예제는 없는 것 같습니다. 논문에서는 k-Glove 로 소개되는 연구가 있긴 한데, 좀 더 알아봐야 할 것 같아요!\n",
+        "\n",
+        "➕ [논문1](https://scienceon.kisti.re.kr/srch/selectPORSrchArticle.do?cn=NPAP13255003&dbt=NPAP)\n",
+        "\n",
+        "\n",
+        "➕[논문2](https://scienceon.kisti.re.kr/commons/util/originalView.do?cn=CFKO201832073078664&oCn=NPAP13255064&dbt=CFKO&journal=NPRO00383361&keyword=%ED%95%9C%EA%B5%AD%EC%96%B4%20%EB%8C%80%ED%99%94%20%EC%97%94%EC%A7%84%EC%97%90%EC%84%9C%EC%9D%98%20%EB%AC%B8%EC%9E%A5%EB%B6%84%EB%A5%98)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "asGcGy6fBM1E"
+      },
+      "source": [
+        "🔹 **1-(1)** glove python\n",
+        "\n",
+        "* [실습 : basic code](https://wikidocs.net/22885) 👉 필수"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "background_save": true
+        },
+        "id": "V31NoJdu5t3p",
+        "outputId": "eda0d932-8bd4-4b2e-c3e9-47970e4da1d2"
+      },
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "Collecting glove_python_binary\n",
+            "  Downloading glove_python_binary-0.2.0-cp37-cp37m-manylinux1_x86_64.whl (948 kB)\n",
+            "\u001b[?25l\r\u001b[K     |▍                               | 10 kB 22.7 MB/s eta 0:00:01\r\u001b[K     |▊                               | 20 kB 27.2 MB/s eta 0:00:01\r\u001b[K     |█                               | 30 kB 31.5 MB/s eta 0:00:01\r\u001b[K     |█▍                              | 40 kB 16.5 MB/s eta 0:00:01\r\u001b[K     |█▊                              | 51 kB 12.2 MB/s eta 0:00:01\r\u001b[K     |██                              | 61 kB 14.1 MB/s eta 0:00:01\r\u001b[K     |██▍                             | 71 kB 13.5 MB/s eta 0:00:01\r\u001b[K     |██▊                             | 81 kB 14.3 MB/s eta 0:00:01\r\u001b[K     |███                             | 92 kB 15.7 MB/s eta 0:00:01\r\u001b[K     |███▌                            | 102 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███▉                            | 112 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |████▏                           | 122 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |████▌                           | 133 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |████▉                           | 143 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |█████▏                          | 153 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |█████▌                          | 163 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |█████▉                          | 174 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |██████▏                         | 184 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |██████▋                         | 194 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███████                         | 204 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███████▎                        | 215 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███████▋                        | 225 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |████████                        | 235 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |████████▎                       | 245 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |████████▋                       | 256 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |█████████                       | 266 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |█████████▎                      | 276 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |█████████▊                      | 286 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |██████████                      | 296 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |██████████▍                     | 307 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |██████████▊                     | 317 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███████████                     | 327 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███████████▍                    | 337 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███████████▊                    | 348 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |████████████                    | 358 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |████████████▍                   | 368 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |████████████▊                   | 378 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |█████████████▏                  | 389 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |█████████████▌                  | 399 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |█████████████▉                  | 409 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |██████████████▏                 | 419 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |██████████████▌                 | 430 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |██████████████▉                 | 440 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███████████████▏                | 450 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███████████████▌                | 460 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███████████████▉                | 471 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |████████████████▎               | 481 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |████████████████▋               | 491 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |█████████████████               | 501 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |█████████████████▎              | 512 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |█████████████████▋              | 522 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |██████████████████              | 532 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |██████████████████▎             | 542 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |██████████████████▋             | 552 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███████████████████             | 563 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███████████████████▍            | 573 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███████████████████▊            | 583 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |████████████████████            | 593 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |████████████████████▍           | 604 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |████████████████████▊           | 614 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |█████████████████████           | 624 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |█████████████████████▍          | 634 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |█████████████████████▊          | 645 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |██████████████████████          | 655 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |██████████████████████▌         | 665 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |██████████████████████▉         | 675 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███████████████████████▏        | 686 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███████████████████████▌        | 696 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███████████████████████▉        | 706 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |████████████████████████▏       | 716 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |████████████████████████▌       | 727 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |████████████████████████▉       | 737 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |█████████████████████████▏      | 747 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |█████████████████████████▌      | 757 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |██████████████████████████      | 768 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |██████████████████████████▎     | 778 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |██████████████████████████▋     | 788 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███████████████████████████     | 798 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███████████████████████████▎    | 808 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███████████████████████████▋    | 819 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |████████████████████████████    | 829 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |████████████████████████████▎   | 839 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |████████████████████████████▋   | 849 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |█████████████████████████████   | 860 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |█████████████████████████████▍  | 870 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |█████████████████████████████▊  | 880 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |██████████████████████████████  | 890 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |██████████████████████████████▍ | 901 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |██████████████████████████████▊ | 911 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███████████████████████████████ | 921 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███████████████████████████████▍| 931 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |███████████████████████████████▊| 942 kB 14.7 MB/s eta 0:00:01\r\u001b[K     |████████████████████████████████| 948 kB 14.7 MB/s \n",
+            "\u001b[?25hRequirement already satisfied: scipy in /usr/local/lib/python3.7/dist-packages (from glove_python_binary) (1.4.1)\n",
+            "Requirement already satisfied: numpy in /usr/local/lib/python3.7/dist-packages (from glove_python_binary) (1.21.5)\n",
+            "Installing collected packages: glove-python-binary\n",
+            "Successfully installed glove-python-binary-0.2.0\n"
+          ]
+        }
+      ],
+      "source": [
+        "\n",
+        "pip install glove_python_binary\n",
+        "from glove import Corpus, Glove\n",
+        "\n",
+        "corpus = Corpus() \n",
+        "\n",
+        "\n",
+        "corpus.fit(result, window=5)\n",
+        "glove = Glove(no_components=100, learning_rate=0.05)\n",
+        "\n",
+        "\n",
+        "glove.fit(corpus.matrix, epochs=20, no_threads=4, verbose=True)\n",
+        "glove.add_dictionary(corpus.dictionary)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "ta6QgoKO5uXJ"
+      },
+      "outputs": [],
+      "source": [
+        "print(glove.most_similar(\"man\"))\n",
+        "[('woman', 0.9621753707315267), ('guy', 0.8860281455579162), ('girl', 0.8609057388487154), ('kid', 0.8383640509911114)]\n",
+        "print(glove.most_similar(\"boy\"))\n",
+        "[('girl', 0.9436601252235809), ('kid', 0.8400949618225224), ('woman', 0.8397250531245034), ('man', 0.8303093585541573)]\n",
+        "print(glove.most_similar(\"university\"))\n",
+        "[('harvard', 0.8690162017225468), ('cambridge', 0.8373272000675909), ('mit', 0.8288055170365777), ('stanford', 0.8212712738131419)]\n",
+        "print(glove.most_similar(\"water\"))\n",
+        "[('air', 0.838286550826724), ('clean', 0.8326093688298345), ('fresh', 0.8232884971285377), ('electricity', 0.8097066570385377)]\n",
+        "print(glove.most_similar(\"physics\"))\n",
+        "[('chemistry', 0.8379143027061764), ('biology', 0.827856517644139), ('economics', 0.775563255616767), ('finance', 0.7736692309034663)]\n",
+        "print(glove.most_similar(\"muscle\"))\n",
+        "[('skeletal', 0.7977490484723809), ('tissue', 0.7714119298512192), ('nerve', 0.7477850181231441), ('stem', 0.7222964725687838)]\n",
+        "print(glove.most_similar(\"clean\"))\n",
+        "[('water', 0.8264213732980569), ('fresh', 0.7850091074483321), ('wind', 0.7711854196846724), ('heat', 0.7646505765422197)]"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "3ADfVM9lO9NE"
+      },
+      "source": [
+        "🔹 **1-(2)** pre-trained glove \n",
+        "\n",
+        "* **사전학습모델** : 임의의 값으로 초기화하던 모델의 가중치들을 다른 문제에 학습시킨 가중치들로 초기화하는 방법이다.사전 학습한 가중치를 활용해 학습하고자 하는 본래 문제를 하위문제라고 한다. \n",
+        "\n",
+        "* [실습 : 문장의 긍부정을 판단하는 감성 분류 모델 만들기](https://wikidocs.net/33793) 👉 필수\n",
+        "  * [설명참고](https://omicro03.medium.com/%EC%9E%90%EC%97%B0%EC%96%B4%EC%B2%98%EB%A6%AC-nlp-16%EC%9D%BC%EC%B0%A8-pre-trained-word-embedding-bb30db424a35)\n",
+        "* pre-trained data 를 가져오는데 시간이 오래걸림\n",
+        "* kaggle 대회에서 주로 이 방식을 많이 사용함\n",
+        "  * [참고](https://lsjsj92.tistory.com/455)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "ZlngY35O53sk"
+      },
+      "outputs": [],
+      "source": [
+        "vocab_size = 20000\n",
+        "output_dim = 128\n",
+        "input_length = 500\n",
+        "\n",
+        "v = Embedding(vocab_size, output_dim, input_length=input_length)\n",
+        "\n",
+        "import numpy as np\n",
+        "from tensorflow.keras.preprocessing.text import Tokenizer\n",
+        "from tensorflow.keras.preprocessing.sequence import pad_sequences\n",
+        "\n",
+        "sentences = ['nice great best amazing', 'stop lies', 'pitiful nerd', 'excellent work', 'supreme quality', 'bad', 'highly respectable']\n",
+        "y_train = [1, 0, 0, 1, 1, 0, 1]\n",
+        "\n",
+        "tokenizer = Tokenizer()\n",
+        "tokenizer.fit_on_texts(sentences)\n",
+        "vocab_size = len(tokenizer.word_index) + 1 # 패딩을 고려하여 +1\n",
+        "print('단어 집합 :',vocab_size)\n",
+        "단어 집합 : 16\n",
+        "\n",
+        "\n",
+        "\n",
+        "print(X_train)\n",
+        "[[ 1  2  3  4]\n",
+        " [ 5  6  0  0]\n",
+        " [ 7  8  0  0]\n",
+        " [ 9 10  0  0]\n",
+        " [11 12  0  0]\n",
+        " [13  0  0  0]\n",
+        " [14 15  0  0]]\n",
+        "print(y_train)\n",
+        "[1, 0, 0, 1, 1, 0, 1]"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "f_wcrE5PtLMI"
+      },
+      "source": [
+        "🔹 **1-(3)** fine tuning glove\n",
+        "* 미세조정 : 사전 학습한 모든 가중치와 더불어 하위 문제를 위한 최소한의 가중치를 추가해 모델을 추가로 학습하는 방법이다. \n",
+        "\n",
+        "* fine tuning 이 필요한 경우 \n",
+        "  * pretrained model 에 데이터셋에 있는 단어가 포함되지 않은 경우 \n",
+        "  * 데이터 집합이 너무 작아서 전체 모델을 훈련시키기 어려운 경우 \n",
+        "\n",
+        "* [Mittens 라이브러리로 fine tuning](https://towardsdatascience.com/fine-tune-glove-embeddings-using-mittens-89b5f3fe4c39) 👉 필수\n",
+        "  *  GloVe 임베딩을 fine-tuning 하기 위한 파이썬 라이브러리\n",
+        "  * [github](https://github.com/roamanalytics/mittens)\n",
+        "\n",
+        "* [한국어 소설 텍스트 데이터 미세조정 모델 학습 - GPT2](https://m.blog.naver.com/PostView.nhn?isHttpsRedirect=true&blogId=horajjan&logNo=222104684132&categoryNo=120&proxyReferer=) 👉 선택 (glove 모델 예제는 아닙니다. fine-tuning 에 초점을 두어서 참고해주시면 좋을 것 같습니다.)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "xDBDn64S58U5"
+      },
+      "outputs": [],
+      "source": [
+        "import csv\n",
+        "import numpy as np\n",
+        "from collections import Counter\n",
+        "from nltk.corpus import brown\n",
+        "from mittens import GloVe, Mittens\n",
+        "from sklearn.feature_extraction import stop_words\n",
+        "from sklearn.feature_extraction.text import CountVectorizer\n",
+        "\n",
+        "\n",
+        "def glove2dict(glove_filename):\n",
+        "    with open(glove_filename, encoding='utf-8') as f:\n",
+        "        reader = csv.reader(f, delimiter=' ', quoting=csv.QUOTE_NONE)\n",
+        "        embed = {line[0]: np.array(list(map(float, line[1:])))\n",
+        "                for line in reader}\n",
+        "    return embed\n",
+        "\n",
+        "glove_path = \"glove.6B.50d.txt\" # get it from https://nlp.stanford.edu/projects/glove\n",
+        "pre_glove = glove2dict(glove_path)\n",
+        "\n",
+        "sw = list(stop_words.ENGLISH_STOP_WORDS)\n",
+        "brown_data = brown.words()[:200000]\n",
+        "brown_nonstop = [token.lower() for token in brown_data if (token.lower() not in sw)]\n",
+        "oov = [token for token in brown_nonstop if token not in pre_glove.keys()]\n",
+        "\n",
+        "def get_rareoov(xdict, val):\n",
+        "    return [k for (k,v) in Counter(xdict).items() if v<=val]\n",
+        "\n",
+        "#oov_rare = get_rareoov(oov, 1)\n",
+        "#corp_vocab = list(set(oov) - set(oov_rare))\n",
+        "#brown_tokens = [token for token in brown_nonstop if token not in oov_rare]\n",
+        "#brown_doc = [' '.join(brown_tokens)]\n",
+        "\n",
+        "corp_vocab = list(set(oov))\n",
+        "brown_doc = [' '.join(brown_nonstop)]\n",
+        "\n",
+        "cv = CountVectorizer(ngram_range=(1,1), vocabulary=corp_vocab)\n",
+        "X = cv.fit_transform(brown_doc)\n",
+        "Xc = (X.T * X)\n",
+        "Xc.setdiag(0)\n",
+        "coocc_ar = Xc.toarray()\n",
+        "\n",
+        "mittens_model = Mittens(n=50, max_iter=1000)\n",
+        "\n",
+        "new_embeddings = mittens_model.fit(\n",
+        "    coocc_ar,\n",
+        "    vocab=corp_vocab,\n",
+        "    initial_embedding_dict= pre_glove)\n",
+        "\n",
+        "newglove = dict(zip(corp_vocab, new_embeddings))\n",
+        "f = open(\"repo_glove.pkl\",\"wb\")\n",
+        "pickle.dump(newglove, f)\n",
+        "f.close()"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "FHiR5mN4577l"
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "I_-OB9Siga3G"
+      },
+      "source": [
+        "* (참고) word2vec pretrained example\n",
+        "\n",
+        "➕ [word2vec 사전학습 모델 -한국어1](http://doc.mindscale.kr/km/unstructured/11.html)\n",
+        "\n",
+        "➕ [word2vec 사전학습 - 한국어2](https://monetd.github.io/python/nlp/Word-Embedding-Word2Vec-%EC%8B%A4%EC%8A%B5/#%ED%95%9C%EA%B5%AD%EC%96%B4-word2vec-%EB%A7%8C%EB%93%A4%EA%B8%B0)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "xUWWDwdiPLS9"
+      },
+      "source": [
+        "### **2️⃣ NER**"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "9N0B4VknPkTk"
+      },
+      "source": [
+        "👀 **내용 복습** \n",
+        "* 개체명 인식을 사용하면 코퍼스로부터 어떤 단어가 사람, 장소, 조직 등을 의미하는 단어인지를 찾을 수 있다. "
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "QWgla1BuPRqJ"
+      },
+      "source": [
+        "\n",
+        "\n",
+        "\n",
+        "🔹 **2-(1)** NER task by nltk library\n",
+        "\n",
+        "\n",
+        "* nltk 에서는 개체명 인식기 (NER chunker) 를 지원하고 있다. \n",
+        "* ne_chunk 는 개체명을 태깅하기 위해서 앞서 품사 태깅 pos_tag 가 수행되어야 한다. \n",
+        "\n",
+        "\n",
+        "📌 [basic code](https://wikidocs.net/30682) 👉 필수 \n",
+        "\n",
+        "📌 [BIO 표현, LSTM을 활용한 NER 실습](https://wikidocs.net/24682) 👉 선택\n",
+        "\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "diaZweMyAxJz"
+      },
+      "outputs": [],
+      "source": [
+        "from nltk import word_tokenize, pos_tag, ne_chunk\n",
+        "\n",
+        "sentence = \"James is working at Disney in London\"\n",
+        "# 토큰화 후 품사 태깅\n",
+        "tokenized_sentence = pos_tag(word_tokenize(sentence))\n",
+        "print(tokenized_sentence)\n",
+        "[('James', 'NNP'), ('is', 'VBZ'), ('working', 'VBG'), ('at', 'IN'), ('Disney', 'NNP'), ('in', 'IN'), ('London', 'NNP')]\n",
+        "# 개체명 인식\n",
+        "ner_sentence = ne_chunk(tokenized_sentence)\n",
+        "print(ner_sentence)\n",
+        "(S\n",
+        "  (PERSON James/NNP)\n",
+        "  is/VBZ\n",
+        "  working/VBG\n",
+        "  at/IN\n",
+        "  (ORGANIZATION Disney/NNP)\n",
+        "  in/IN\n",
+        "  (GPE London/NNP))"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "1k09tKha3Lgi"
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "TPX-WtSvPmm6"
+      },
+      "source": [
+        "🔹 **2-(2)** NER task by spacy library\n",
+        "\n",
+        "\n",
+        "* spaCy 는 자연어처리를 위한 파이썬 기반의 오픈 소스 라이브러리로 다음과 같은 기능을 제공한다. \n",
+        "  * Tokenization \n",
+        "  * POS tagging \n",
+        "  * Lemmatization \n",
+        "  * Sentence Boundary Detection (SBD)\n",
+        "  * Named Entity Recognition (NER)\n",
+        "  * Similarity\n",
+        "  * Text Classification\n",
+        "  * Rule-based Matching\n",
+        "  * Training\n",
+        "  * Serialization\n",
+        "\n",
+        "* spaCy 와 NER\n",
+        "  * .ents → .label_\n",
+        "\n",
+        "\n",
+        "📌 [basic code](https://frhyme.github.io/python-lib/nlp_spacy_1/) 👉 필수 (NER 부분만)\n",
+        "\n",
+        "📌 [kaggle_Custom NER using SpaCy](https://www.kaggle.com/code/amarsharma768/custom-ner-using-spacy/notebook) 👉 선택\n",
+        "\n",
+        "  * 훈련되지 않은 데이터 세트에 명명된 엔티티를 학습하는 방법 : 이력서 pdf 데이터 활용 \n",
+        "  * manually labelled \n",
+        "\n",
+        "📌 [한국어 NER](https://github.com/monologg/KoBERT-NER) 👉 참고하면 좋을 자료\n",
+        "\n",
+        "➕ [참고](http://aispiration.com/nlp2/nlp-ner-python.html)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "background_save": true
+        },
+        "id": "WXjRfz-qP0Xx"
+      },
+      "outputs": [],
+      "source": [
+        "oc = nlp('Apple is looking at buying U.K. startup for $1 billion')\n",
+        "\n",
+        "for ent in doc.ents:\n",
+        "    print(ent.text, ent.label_)\n",
+        "    Apple ORG\n",
+        "U.K. GPE\n",
+        "$1 billion MONEY\n",
+        "\n",
+        "doc = nlp(\"\"\"But Google is starting from behind. The company made a late push\n",
+        "into hardware, and Apple’s Siri, available on iPhones, and Amazon’s Alexa\n",
+        "software, which runs on its Echo and Dot devices, have clear leads in\n",
+        "consumer adoption.\"\"\".replace(\"\\n\", \" \").strip())\n",
+        "\n",
+        "\n",
+        "for ent in doc.ents:\n",
+        "    print(ent.text, ent.label_)\n",
+        "\n",
+        "    Google ORG\n",
+        "Apple ORG\n",
+        "iPhones PRODUCT\n",
+        "Amazon ORG\n",
+        "Alexa ORG\n",
+        "Echo GPE\n",
+        "Dot ORG"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "008-V5QsQG25"
+      },
+      "source": [
+        "###**3️⃣ Dependency Parsing**"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "oQfcodHQQPlt"
+      },
+      "source": [
+        "👀 **내용 복습** \n",
+        "* 문장의 전체적인 구성/구조 보다는 각 개별단어 간의 '의존관계' 또는 '수식관계' 와 같은 단어간 관계를 파악하는 것이 목적인 NLP Task\n",
+        "* 문장 해석의 모호성을 없애기 위해 Parsing 을 한다."
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "mJLAzZnbRNlL"
+      },
+      "source": [
+        "\n",
+        "\n",
+        "\n",
+        "🔹 **3-(1)** Dependency Parsing by spacy library\n",
+        "\n",
+        "\n",
+        "* [basic](https://frhyme.github.io/python-lib/nlp_spacy_1/#navigating-parse-tree) 👉 dependecy parsing 부분만 필수\n",
+        "* .dep_ 메서드\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "HbQEYt76bJXz"
+      },
+      "outputs": [],
+      "source": [
+        "doc = nlp(\"Autonomous cars shift insurance liability toward manufacturers\")\n",
+        "\n",
+        "\n",
+        "noun_chunks = doc.noun_chunks\n",
+        "print(type(noun_chunks))\n",
+        "noun_chunk = list(noun_chunks)[0]\n",
+        "print(type(noun_chunk))\n",
+        "token = noun_chunk[0]\n",
+        "print(type(token))\n",
+        "\n",
+        "print(\"==\"*30)\n",
+        "print(\"\"\"\n",
+        "Text: The original noun chunk text.\n",
+        "Root text: The original text of the word connecting the noun chunk to the rest of the parse.\n",
+        "Root dep: Dependency relation connecting the root to its head.\n",
+        "Root head text: The text of the root token's head.\n",
+        "\"\"\".strip())\n",
+        "print(\"==\"*30)\n",
+        "str_format = \"{:>25}\"*4\n",
+        "for chunk in doc.noun_chunks:\n",
+        "    print(str_format.format(chunk.text, chunk.root.text, chunk.root.dep_, chunk.root.head.text))\n",
+        "\n",
+        "<class 'generator'>\n",
+        "<class 'spacy.tokens.span.Span'>\n",
+        "<class 'spacy.tokens.token.Token'>\n",
+        "============================================================\n",
+        "Text: The original noun chunk text.\n",
+        "Root text: The original text of the word connecting the noun chunk to the rest of the parse.\n",
+        "Root dep: Dependency relation connecting the root to its head.\n",
+        "Root head text: The text of the root token's head.\n",
+        "============================================================\n",
+        "          Autonomous cars                     cars                    nsubj                    shift\n",
+        "      insurance liability                liability                     dobj                    shift\n",
+        "            manufacturers            manufacturers                     pobj "
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "W9QAEsrLAxHP"
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "XQD5oiGgRfHe"
+      },
+      "source": [
+        "🔹 **3-(2)** Spacy (kaggle) \n",
+        "\n",
+        "* 캐글 노트북 환경에서 실습해보는 것을 권장드립니다!\n",
+        "\n",
+        "* [kaggle_spaCy](https://www.kaggle.com/code/nirant/hitchhiker-s-guide-to-nlp-in-spacy) 👉 필수\n",
+        "  * 도날드 트럼프 트위터 트윗 내용 데이터 분석\n",
+        "\n",
+        "\n",
+        "👀 **노트북 키포인트** \n",
+        "  1. spacy.display 메서드를 사용한 NER 시각화 \n",
+        "  2. Tagging 을 통한 트럼프 트윗 분석 : noun_chunks 는 dependency graph를 고려하여, noun phrase를 뽑아준다. \n",
+        "  3. [spacy Match](https://yujuwon.tistory.com/entry/spaCy-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-Rule-based-Matching) : 직접 문장/단어 패턴을 등록하여 parsing\n",
+        "  4. Question and answering task using Dependency Parsing\n",
+        "    * spacy display :  ``style = 'dep'``\n",
+        "    * .dep_\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "LuHGKITRbKYq"
+      },
+      "outputs": [],
+      "source": [
+        "import spacy\n",
+        "import random\n",
+        "from collections import Counter #for counting\n",
+        "import seaborn as sns #for visualization\n",
+        "import matplotlib.pyplot as plt\n",
+        "import pandas as pd\n",
+        "plt.style.use('seaborn')\n",
+        "sns.set(font_scale=2)\n",
+        "import json\n",
+        "def pretty_print(pp_object):\n",
+        "    print(json.dumps(pp_object, indent=2))\n",
+        "    \n",
+        "from IPython.display import Markdown, display\n",
+        "def printmd(string, color=None):\n",
+        "    colorstr = \"<span style='color:{}'>{}</span>\".format(color, string)\n",
+        "    display(Markdown(colorstr))\n",
+        "\n",
+        "    !pip install --upgrade pip\n",
+        "!pip install textacy\n",
+        "\n",
+        "!python -m spacy download en_core_web_lg\n",
+        "nlp = spacy.load('en_core_web_lg')\n",
+        "# python -m spacy download en_vectors_web_lg\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "uMArOUrxAJ8K"
+      },
+      "outputs": [],
+      "source": []
+    }
+  ],
+  "metadata": {
+    "colab": {
+      "collapsed_sections": [],
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
