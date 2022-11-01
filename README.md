@@ -9,7 +9,7 @@
   
 | 주차 | 내용         | 발표자                       | 발표자료 |
 | ---- | ------------ | ---------------------------- | -------- |
-|  8   |논문스터디    | 고주은, 신지연               |[📚]([Week8_발표자료.pdf](https://github.com/Ewha-Euron/2022-2-Euron-Study-Assignment/files/9906614/Week8_.pdf) )|
+|  8   |논문스터디    | 고주은, 신지연               |[📚](  [Week8_발표자료.pdf](https://github.com/Ewha-Euron/2022-2-Euron-Study-Assignment/files/9906614/Week8_.pdf)  )|
 
 
 
