@@ -46,7 +46,7 @@
 
 **복습과제 제출 방법**
 
-> 해당 파일을 Week_11 branch에 업로드하신 후 해당 Week_8 branch에서 pull request 를 진행해주세요.
+> 해당 파일을 Week_11 branch에 업로드하신 후 해당 Week_11 branch에서 pull request 를 진행해주세요.
 >
 ## **Due**
 
