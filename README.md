@@ -64,8 +64,9 @@
     - 브랜치: `master`
     - 해당 주차 브랜치에 과제 업로드하고 Pull Request, 이때 label은 `NLP` , `예습과제`
     
- 
 ### 📍 복습과제
+- 아래 구글 드라이브에서 ipynb 파일을 다운받아 필사 과제를 진행해주시면 됩니다. 
+  - [Transformer 코딩 실습](https://drive.google.com/file/d/1CsYPIdQmIxJ6OKjUlgNo_swS-M9A0iTb/view?usp=sharing)
 
   
 ### 복습과제 제출 방법
