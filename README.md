@@ -124,10 +124,13 @@
 > 매주 예습 과제와 복습 과제가 주어집니다. 
   
 ### 📍 예습과제 (~11/14)
- 1️⃣ 파이썬 머신러닝 완벽 가이드 7 캐글 파트를 필사하여 주피터나 구글 코랩으로 실행한 실습 코드들을 ipynb 형식으로 정리
-  
-  - 카톡방에 공유된 노트 필사 방법 참고 
-  
+1️⃣ 파이썬 머신러닝 완벽 가이드 7장 군집화의 chapter 6에 해당하는 실습 내용과 아래의 노트북을 필사해주세요.
+
+  * [캐글 노트북](https://www.kaggle.com/code/hellbuoy/online-retail-k-means-hierarchical-clustering)
+  * key point : K-means clustering, Hierarchical Clustering, clustering analysis 
+ 
+2️⃣ [Customer Personality Analysis](https://www.kaggle.com/code/karnikakapoor/customer-segmentation-clustering) 노트북을 필사해주세요. 
+  * key point : K-means, model evaluation, Cluster EDA → cluster interpretation 
   
 ### 예습과제 제출 방법
   
