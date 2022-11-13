@@ -1,7 +1,7 @@
 # Euron 3기 예습·복습 과제 제출
 
-### ▶ [Computer Vision](https://github.com/Ewha-Euron/2022-2-Euron-CV)
 ## EURON 3기 - 스터디팀 13주차
+
 <details>
 <summary>CV</summary>
 <div markdown="1">
@@ -34,5 +34,6 @@
 - **11월 21일**까지 제출합니다.
 </div>
 </details>
+
 ### ▶ [Natural Language Processing](https://github.com/Ewha-Euron/2022-2-Euron-NLP)
 ### ▶ [Data Science](https://github.com/Ewha-Euron/2022-2-Euron-DS)
