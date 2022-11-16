@@ -103,4 +103,53 @@
 </div>
 </details>
 
-### ▶ [Data Science](https://github.com/Ewha-Euron/2022-2-Euron-DS)
+<details>
+<summary>DS</summary>
+<div markdown="1">       
+
+<br />  
+  
+| 주차 | 내용         | 발표자                       | 발표자료 |
+| ---- | ------------ | ---------------------------- | -------- |
+|  13   |파이썬머신러닝완벽가이드 8장 01~06|조혜빈, 차수빈, 소예림| [📚]()    |
+
+
+
+## Assignment
+
+> 매주 예습 과제와 복습 과제가 주어집니다. 
+  
+### 📍 예습과제 (~11/21)
+ 1️⃣ 파이썬 머신러닝 완벽 가이드 8장 01~06을 필사하여 주피터나 구글 코랩으로 실행한 실습 코드들을 ipynb 형식으로 정리
+
+ 
+### 예습과제 제출 방법
+  
+> 해당 파일을 `master` branch에 업로드하신 후 해당 `master`  branch에서  `pull request` 를 진행해주세요.
+  
+- 과제 제출 방법
+    - 레포: (origin) username/2022-2-Euron-Study-Assignments
+    - 브랜치: `master`
+    - 해당 주차 브랜치에 과제 업로드하고 Pull Request, 이때 label은 `DS` , `예습과제`
+  
+### 📍 복습과제 (~11/21)
+
+
+### 복습과제 제출 방법
+  
+> 해당 파일을 `Week_12` branch에 업로드하신 후 해당 `Week_12`  branch에서  `pull request` 를 진행해주세요.
+  
+- 과제 제출 방법
+    - 레포: (origin) username/2022-2-Euron-Study-Assignments
+    - 브랜치: `Week_12`
+    - 해당 주차 브랜치에 과제 업로드하고 Pull Request, 이때 label은 `DS` , `복습과제`
+
+  
+## Due 
+  
+📍 13주차 예습과제
+  - **11월 21일**까지 제출합니다.
+  
+📍 12주차 복습과제
+  - **11월 21일**까지 제출합니다.
+
