@@ -1,5 +1,5 @@
 # Euron 3기 예습·복습 과제 제출
-
+<details>
 <summary>CV</summary>
 <div markdown="1">
 
