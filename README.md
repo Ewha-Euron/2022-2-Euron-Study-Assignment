@@ -1,6 +1,49 @@
 # Euron 3기 예습·복습 과제 제출
 
-### ▶ [Computer Vision](https://github.com/Ewha-Euron/2022-2-Euron-CV)
+<summary>CV</summary>
+<div markdown="1">
+
+<br />
+
+| 주차 | 내용                                    | 발표자         | 발표자료 |
+| ---- | --------------------------------------- | ---------------|-------- |
+| 14   |cs231n 12강 Visualizing and Understanding| 고주은, 백승민 | [📚]()  |
+
+
+
+## **Assignment**
+
+### **📍 14주차 예습과제 (~12/5)**
+
+① CS231N 12강을 수강하고, 요약 및 정리한 내용을 깃허브에 업로드
+
+② (선택) 질문 사항이나 공유하고 싶은 내용 `Ewha-Euron/2022-2-Euron-CV` issue에 추가
+
+**예습과제 제출 방법**
+
+> 해당 파일을 master branch에 업로드하신 후 해당 master branch에서 pull request 를 진행해주세요.
+>
+
+### **📍 14주차 복습과제 (~12/5)**
+
+- [https://cs231n.github.io/assignments2021/assignment3/](https://cs231n.github.io/assignments2021/assignment3/)의 `Q3: Network Vi
+`Network_Visualization.ipynb` 을 완료하신 후, `.py` 파일로 변환해서 제출해주세요. (모든 cell을 하나의 py 파일에 합쳐주세요)
+- 파일명: `network_visualization.py`
+
+**복습과제 제출 방법**
+
+> 해당 파일을 Week_12 branch에 업로드하신 후 해당 Week_14 branch에서 pull request 를 진행해주세요.
+>
+## **Due**
+
+- 14주차 예습과제
+	- **12월 5일**까지 제출합니다.
+- 13주차 복습과제
+	- **12월 5일**까지 제출합니다.
+
+</div>
+</details>
+
 ### ▶ [Natural Language Processing](https://github.com/Ewha-Euron/2022-2-Euron-NLP)
 
 <details>
