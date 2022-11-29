@@ -1,0 +1,482 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Moonyaeji/2022-2-Euron-Study-Assignment/blob/master/week13_nlp_%EB%B3%B5%EC%8A%B5%EA%B3%BC%EC%A0%9C\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "📌  **상단의 '파일-드라이브에 사본 저장' 해서 본인 드라이브에 저장된 사본 이용해서 실습 해주세요!!**\n",
+        "\n",
+        "📌 week13 복습습과제는 **NLG 실습**으로 구성되어 있습니다.\n",
+        "\n",
+        "📌 위키독스의 딥러닝을 이용한 자연어 처리 입문 교재 실습, 관련 블로그 등의 문서 자료로 구성되어 있는 과제입니다. \n",
+        "\n",
+        "📌 안내된 링크에 맞추어 **직접 코드를 따라 치면서 (필사)** 해당 nlp task 의 기본적인 라이브러리와 메서드를 숙지해보시면 좋을 것 같습니다😊 필수라고 체크한 부분은 과제에 반드시 포함시켜주시고, 선택으로 체크한 부분은 자율적으로 스터디 하시면 됩니다.\n",
+        "\n",
+        "📌 궁금한 사항은 깃허브 이슈나, 카톡방, 세션 발표 시작 이전 시간 등을 활용하여 자유롭게 공유해주세요!"
+      ],
+      "metadata": {
+        "id": "BX3ac8Ag1RPC"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "ppuTdZVWSo0b"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import nltk\n",
+        "# nltk colab 환경에서 실행시 필요한 코드입니다. \n",
+        "nltk.download('punkt')\n",
+        "nltk.download('averaged_perceptron_tagger')\n",
+        "nltk.download('maxent_ne_chunker')\n",
+        "nltk.download('words')"
+      ],
+      "metadata": {
+        "id": "4JEquLR91VBe"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "🥰 **이하 예제를 실습하시면 됩니다.**\n",
+        "\n",
+        "**1-(1)~(2)는 필수과제, 2는 선택과제입니다.**\n"
+      ],
+      "metadata": {
+        "id": "Kq8aMYKGPQR0"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "### **1️⃣ NLG task 실습**"
+      ],
+      "metadata": {
+        "id": "SHTPAk95iNtP"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "👀 내용 복습\n",
+        "\n",
+        "NLG 는 새로운 text 를 만들어 내는 모든 task 를 의미하며 기계번역, 텍스트 요약, 채팅, 스토리텔링, QA 등이 있다. "
+      ],
+      "metadata": {
+        "id": "j5msd7Igjz9D"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "🔹 1-(1) RNN 을 이용한 text generation \n",
+        "\n",
+        "📌 [Text generation with RNN](https://wikidocs.net/45101) \n",
+        "\n",
+        "* Simple RNN 을 이용한 간단한 한국어 text generation 예제와 LSTM 을 이용한 뉴욕 타임즈 기사 헤드라인 생성 예제를 필사해주세요."
+      ],
+      "metadata": {
+        "id": "9L-jAHPkiBV0"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import numpy as np\n",
+        "from tensorflow.keras.preprocessing.text import Tokenizer\n",
+        "from tensorflow.keras.preprocessing.sequence import pad_sequences\n",
+        "from tensorflow.keras.utils import to_categorical\n",
+        "\n",
+        "tokenizer = Tokenizer()\n",
+        "tokenizer.fit_on_texts([text])\n",
+        "vocab_size = len(tokenizer.word_index) + 1\n",
+        "print('단어 집합의 크기 : %d' % vocab_size)\n",
+        "\n",
+        "print(tokenizer.word_index)\n",
+        "\n",
+        "sequences = list()\n",
+        "for line in text.split('\\n'): # 줄바꿈 문자를 기준으로 문장 토큰화\n",
+        "    encoded = tokenizer.texts_to_sequences([line])[0]\n",
+        "    for i in range(1, len(encoded)):\n",
+        "        sequence = encoded[:i+1]\n",
+        "        sequences.append(sequence)\n",
+        "\n",
+        "print('학습에 사용할 샘플의 개수: %d' % len(sequences))\n",
+        "\n",
+        "print(sequences)\n",
+        "\n",
+        "max_len = max(len(l) for l in sequences) # 모든 샘플에서 길이가 가장 긴 샘플의 길이 출력\n",
+        "print('샘플의 최대 길이 : {}'.format(max_len))\n",
+        "sequences = pad_sequences(sequences, maxlen=max_len, padding='pre')\n",
+        "print(sequences)\n",
+        "sequences = np.array(sequences)\n",
+        "X = sequences[:,:-1]\n",
+        "y = sequences[:,-1]\n",
+        "y = to_categorical(y, num_classes=vocab_size)\n",
+        "from tensorflow.keras.models import Sequential\n",
+        "from tensorflow.keras.layers import Embedding, Dense, SimpleRNN\n",
+        "embedding_dim = 10\n",
+        "hidden_units = 32\n",
+        "\n",
+        "model = Sequential()\n",
+        "model.add(Embedding(vocab_size, embedding_dim))\n",
+        "model.add(SimpleRNN(hidden_units))\n",
+        "model.add(Dense(vocab_size, activation='softmax'))\n",
+        "model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])\n",
+        "model.fit(X, y, epochs=200, verbose=2)\n",
+        "\n",
+        "def sentence_generation(model, tokenizer, current_word, n): # 모델, 토크나이저, 현재 단어, 반복할 횟수\n",
+        "    init_word = current_word\n",
+        "    sentence = ''\n",
+        "\n",
+        "    # n번 반복\n",
+        "    for _ in range(n):\n",
+        "        # 현재 단어에 대한 정수 인코딩과 패딩\n",
+        "        encoded = tokenizer.texts_to_sequences([current_word])[0]\n",
+        "        encoded = pad_sequences([encoded], maxlen=5, padding='pre')\n",
+        "        # 입력한 X(현재 단어)에 대해서 Y를 예측하고 Y(예측한 단어)를 result에 저장.\n",
+        "        result = model.predict(encoded, verbose=0)\n",
+        "        result = np.argmax(result, axis=1)\n",
+        "\n",
+        "        for word, index in tokenizer.word_index.items(): \n",
+        "            # 만약 예측한 단어와 인덱스와 동일한 단어가 있다면 break\n",
+        "            if index == result:\n",
+        "                break\n",
+        "\n",
+        "        # 현재 단어 + ' ' + 예측 단어를 현재 단어로 변경\n",
+        "        current_word = current_word + ' '  + word\n",
+        "\n",
+        "        # 예측 단어를 문장에 저장\n",
+        "        sentence = sentence + ' ' + word\n",
+        "\n",
+        "    sentence = init_word + sentence\n",
+        "    return sentence\n",
+        "\n",
+        "    "
+      ],
+      "metadata": {
+        "id": "Klj6gjETZdgS"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "import numpy as np\n",
+        "from string import punctuation\n",
+        "\n",
+        "from tensorflow.keras.preprocessing.text import Tokenizer\n",
+        "from tensorflow.keras.preprocessing.sequence import pad_sequences\n",
+        "from tensorflow.keras.utils import to_categorical\n",
+        "df = pd.read_csv('ArticlesApril2018.csv')\n",
+        "df.head()\n",
+        "\n",
+        "headline = []\n",
+        "# 헤드라인의 값들을 리스트로 저장\n",
+        "headline.extend(list(df.headline.values)) \n",
+        "headline[:5]\n",
+        "\n",
+        "headline = [word for word in headline if word != \"Unknown\"]\n",
+        "print('노이즈값 제거 후 샘플의 개수 : {}'.format(len(headline)))\n",
+        "\n",
+        "headline[:5]\n",
+        "\n",
+        "def repreprocessing(raw_sentence):\n",
+        "    preproceseed_sentence = raw_sentence.encode(\"utf8\").decode(\"ascii\",'ignore')\n",
+        "    # 구두점 제거와 동시에 소문자화\n",
+        "    return ''.join(word for word in preproceseed_sentence if word not in punctuation).lower()\n",
+        "\n",
+        "preprocessed_headline = [repreprocessing(x) for x in headline]\n",
+        "preprocessed_headline[:5]\n",
+        "\n",
+        "tokenizer = Tokenizer()\n",
+        "tokenizer.fit_on_texts(preprocessed_headline)\n",
+        "vocab_size = len(tokenizer.word_index) + 1\n",
+        "print('단어 집합의 크기 : %d' % vocab_size)\n",
+        "sequences = list()\n",
+        "\n",
+        "for sentence in preprocessed_headline:\n",
+        "\n",
+        "    # 각 샘플에 대한 정수 인코딩\n",
+        "    encoded = tokenizer.texts_to_sequences([sentence])[0] \n",
+        "    for i in range(1, len(encoded)):\n",
+        "        sequence = encoded[:i+1]\n",
+        "        sequences.append(sequence)\n",
+        "\n",
+        "sequences[:11]\n",
+        "index_to_word = {}\n",
+        "for key, value in tokenizer.word_index.items(): # 인덱스를 단어로 바꾸기 위해 index_to_word를 생성\n",
+        "    index_to_word[value] = key\n",
+        "\n",
+        "print('빈도수 상위 582번 단어 : {}'.format(index_to_word[582]))\n",
+        "sequences = pad_sequences(sequences, maxlen=max_len, padding='pre')\n",
+        "print(sequences[:3])"
+      ],
+      "metadata": {
+        "id": "MsJZ9ldFiARK"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "🔹 1-(2) Text summarization with attention\n",
+        "\n",
+        "📌 [아마존 리뷰 요약](https://wikidocs.net/72820) \n",
+        "\n",
+        "* seq2seq + attention 을 이용한 아마존 리뷰 글 text summarization 예제를 필사해주세요."
+      ],
+      "metadata": {
+        "id": "ktAuag_Nk5Zy"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import numpy as np\n",
+        "import pandas as pd\n",
+        "import re\n",
+        "import matplotlib.pyplot as plt\n",
+        "from nltk.corpus import stopwords\n",
+        "from bs4 import BeautifulSoup \n",
+        "from tensorflow.keras.preprocessing.text import Tokenizer \n",
+        "from tensorflow.keras.preprocessing.sequence import pad_sequences\n",
+        "import urllib.request\n",
+        "np.random.seed(seed=0)\n",
+        "\n",
+        "# Reviews.csv 파일을 data라는 이름의 데이터프레임에 저장. 단, 10만개의 행(rows)으로 제한.\n",
+        "data = pd.read_csv(\"Reviews.csv 파일의 경로\", nrows = 100000)\n",
+        "print('전체 리뷰 개수 :',(len(data)))\n",
+        "\n",
+        "data = data[['Text','Summary']]\n",
+        "data.head()\n",
+        "data.sample(10)\n",
+        "data.drop_duplicates(subset=['Text'], inplace=True)\n",
+        "print(\"전체 샘플수 :\", len(data))\n",
+        "data.dropna(axis=0, inplace=True)\n",
+        "print('전체 샘플수 :',(len(data)))\n",
+        "\n",
+        "stop_words = set(stopwords.words('english'))\n",
+        "print('불용어 개수 :', len(stop_words))\n",
+        "print(stop_words)\n",
+        "\n",
+        "def preprocess_sentence(sentence, remove_stopwords = True):\n",
+        "    sentence = sentence.lower() # 텍스트 소문자화\n",
+        "    sentence = BeautifulSoup(sentence, \"lxml\").text # <br />, <a href = ...> 등의 html 태그 제거\n",
+        "    sentence = re.sub(r'\\([^)]*\\)', '', sentence) # 괄호로 닫힌 문자열  제거 Ex) my husband (and myself) for => my husband for\n",
+        "    sentence = re.sub('\"','', sentence) # 쌍따옴표 \" 제거\n",
+        "    sentence = ' '.join([contractions[t] if t in contractions else t for t in sentence.split(\" \")]) # 약어 정규화\n",
+        "    sentence = re.sub(r\"'s\\b\",\"\",sentence) # 소유격 제거. Ex) roland's -> roland\n",
+        "    sentence = re.sub(\"[^a-zA-Z]\", \" \", sentence) # 영어 외 문자(숫자, 특수문자 등) 공백으로 변환\n",
+        "    sentence = re.sub('[m]{2,}', 'mm', sentence) # m이 3개 이상이면 2개로 변경. Ex) ummmmmmm yeah -> umm yeah\n",
+        "\n",
+        "    # 불용어 제거 (Text)\n",
+        "    if remove_stopwords:\n",
+        "        tokens = ' '.join(word for word in sentence.split() if not word in stop_words if len(word) > 1)\n",
+        "    # 불용어 미제거 (Summary)\n",
+        "    else:\n",
+        "        tokens = ' '.join(word for word in sentence.split() if len(word) > 1)\n",
+        "    return tokens\n",
+        "\n",
+        "    temp_text = 'Everything I bought was great, infact I ordered twice and the third ordered was<br />for my mother and father.'\n",
+        "temp_summary = 'Great way to start (or finish) the day!!!'\n",
+        "print(preprocess_sentence(temp_text))\n",
+        "print(preprocess_sentence(temp_summary, 0))"
+      ],
+      "metadata": {
+        "id": "mLmPLEYdZlzX"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from tensorflow.keras.layers import Input, LSTM, Embedding, Dense, Concatenate\n",
+        "from tensorflow.keras.models import Model\n",
+        "from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint\n",
+        "\n",
+        "embedding_dim = 128\n",
+        "hidden_size = 256\n",
+        "\n",
+        "# 인코더\n",
+        "encoder_inputs = Input(shape=(text_max_len,))\n",
+        "\n",
+        "# 인코더의 임베딩 층\n",
+        "enc_emb = Embedding(src_vocab, embedding_dim)(encoder_inputs)\n",
+        "\n",
+        "# 인코더의 LSTM 1\n",
+        "encoder_lstm1 = LSTM(hidden_size, return_sequences=True, return_state=True ,dropout = 0.4, recurrent_dropout = 0.4)\n",
+        "encoder_output1, state_h1, state_c1 = encoder_lstm1(enc_emb)\n",
+        "\n",
+        "# 인코더의 LSTM 2\n",
+        "encoder_lstm2 = LSTM(hidden_size, return_sequences=True, return_state=True, dropout=0.4, recurrent_dropout=0.4)\n",
+        "encoder_output2, state_h2, state_c2 = encoder_lstm2(encoder_output1)\n",
+        "\n",
+        "# 인코더의 LSTM 3\n",
+        "encoder_lstm3 = LSTM(hidden_size, return_state=True, return_sequences=True, dropout=0.4, recurrent_dropout=0.4)\n",
+        "encoder_outputs, state_h, state_c= encoder_lstm3(encoder_output2)\n",
+        "\n",
+        "# 디코더\n",
+        "decoder_inputs = Input(shape=(None,))\n",
+        "\n",
+        "# 디코더의 임베딩 층\n",
+        "dec_emb_layer = Embedding(tar_vocab, embedding_dim)\n",
+        "dec_emb = dec_emb_layer(decoder_inputs)\n",
+        "\n",
+        "# 디코더의 LSTM\n",
+        "decoder_lstm = LSTM(hidden_size, return_sequences = True, return_state = True, dropout = 0.4, recurrent_dropout=0.2)\n",
+        "decoder_outputs, _, _ = decoder_lstm(dec_emb, initial_state = [state_h, state_c])\n",
+        "\n",
+        "decoder_softmax_layer = Dense(tar_vocab, activation = 'softmax')\n",
+        "decoder_softmax_outputs = decoder_softmax_layer(decoder_outputs) \n",
+        "\n",
+        "# 모델 정의\n",
+        "model = Model([encoder_inputs, decoder_inputs], decoder_softmax_outputs)\n",
+        "model.summary()\n",
+        "urllib.request.urlretrieve(\"https://raw.githubusercontent.com/ukairia777/tensorflow-nlp-tutorial/main/20.%20Text%20Summarization/attention.py\", filename=\"attention.py\")\n",
+        "from attention import AttentionLayer\n",
+        "\n",
+        "attn_layer = AttentionLayer(name='attention_layer')\n",
+        "attn_out, attn_states = attn_layer([encoder_outputs, decoder_outputs])\n",
+        "\n",
+        "# 어텐션의 결과와 디코더의 hidden state들을 연결\n",
+        "decoder_concat_input = Concatenate(axis = -1, name='concat_layer')([decoder_outputs, attn_out])\n",
+        "\n",
+        "# 디코더의 출력층\n",
+        "decoder_softmax_layer = Dense(tar_vocab, activation='softmax')\n",
+        "decoder_softmax_outputs = decoder_softmax_layer(decoder_concat_input)\n",
+        "\n",
+        "# 모델 정의\n",
+        "model = Model([encoder_inputs, decoder_inputs], decoder_softmax_outputs)\n",
+        "model.summary()\n",
+        "\n",
+        "es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience = 2)\n",
+        "history = model.fit(x = [encoder_input_train, decoder_input_train], y = decoder_target_train, \\\n",
+        "          validation_data = ([encoder_input_test, decoder_input_test], decoder_target_test),\n",
+        "          batch_size = 256, callbacks=[es], epochs = 50)"
+      ],
+      "metadata": {
+        "id": "xcgptSxJ3zhP"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "### **2️⃣ Text summarization task**"
+      ],
+      "metadata": {
+        "id": "HfTr_BPwGc8D"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "🔹 2-(1) Pororo - text summarization \n",
+        "\n",
+        "📌 [공식문서](https://kakaobrain.github.io/pororo/seq2seq/summary.html) \n",
+        "\n",
+        "📌 [예제 실습](https://teddylee777.github.io/machine-learning/nlp-korean-pororo) \n",
+        "\n",
+        "* PORORO : 카카오 브레인에서 제공한 자연어 처리 라이브러리"
+      ],
+      "metadata": {
+        "id": "eu3adOV2bDs_"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "e2WbVbbsatD5"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "NmVEEfAqdSa1"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "🔹 2-(2) BERT 를 이용한 text summarization \n",
+        "\n",
+        "📌 [논문 리뷰](https://medium.com/@eyfydsyd97/bert%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%ED%85%8D%EC%8A%A4%ED%8A%B8-%EC%9A%94%EC%95%BD-text-summary-b582b5cc7d) \n",
+        "\n",
+        "📌 [BERT Extractive summarizer Library](https://github.com/dmmiller612/bert-extractive-summarizer) \n",
+        "\n",
+        "\n",
+        "📌 [Text summarization Github Repo](https://github.com/uoneway/Text-Summarization-Repo) \n",
+        "\n",
+        "\n",
+        "\n",
+        "➕ [BERT 를 이용한 뉴스 요약 자동화 App 구현 Repo](https://github.com/huydang90/News-Summarization-with-BERT) 👉 프로젝트 예시 참고 자료\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "xsx6OgzwbnIt"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "svtikbdZatBY"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "mnfL6KIZdSuo"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
