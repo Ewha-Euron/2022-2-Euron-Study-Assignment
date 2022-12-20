@@ -1,0 +1,125 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Moonyaeji/2022-2-Euron-Study-Assignment/blob/master/week14_nlp_%EB%B3%B5%EC%8A%B5%EA%B3%BC%EC%A0%9C.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "📌  **상단의 '파일-드라이브에 사본 저장' 해서 본인 드라이브에 저장된 사본 이용해서 실습 해주세요!!**\n",
+        "\n",
+        "📌 week14 복습과제는 **Coreference resolution 실습**으로 구성되어 있습니다.\n",
+        "\n",
+        "\n",
+        "📌 안내된 링크에 맞추어 **직접 코드를 따라 치면서 (필사)** 해당 nlp task 의 기본적인 라이브러리와 메서드를 숙지해보시면 좋을 것 같습니다😊 필수라고 체크한 부분은 과제에 반드시 포함시켜주시고, 선택으로 체크한 부분은 자율적으로 스터디 하시면 됩니다.\n",
+        "\n",
+        "📌 궁금한 사항은 깃허브 이슈나, 카톡방, 세션 발표 시작 이전 시간 등을 활용하여 자유롭게 공유해주세요!"
+      ],
+      "metadata": {
+        "id": "BX3ac8Ag1RPC"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# colab 환경에서 실행시 필요한 코드입니다. \n",
+        "# Install spaCy and neuralcoref with correct versions \n",
+        "\n",
+        "!pip install -U spacy==2.1.0 \n",
+        "\n",
+        "!python -m spacy download en\n",
+        "\n",
+        "!pip uninstall -y neuralcoref \n",
+        "\n",
+        "!pip install neuralcoref --no-binary neuralcoref"
+      ],
+      "metadata": {
+        "id": "4JEquLR91VBe"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "🥰 **이하 예제를 실습하시면 됩니다.**"
+      ],
+      "metadata": {
+        "id": "Kq8aMYKGPQR0"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "### **Coreference resolution 실습**"
+      ],
+      "metadata": {
+        "id": "SHTPAk95iNtP"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "📌 [Coreference resolution library 이용 실습](https://kaveeshabaddage.medium.com/how-to-resolve-coreference-resolution-using-python-97fcd6b2cedb) \n",
+        "\n",
+        "* Coreference resolution은 언어학적 지식이 많이 필요하고 이론적인 내용이 많아서 실습할 코드가 많지는 않습니다. \n",
+        "* 따라서 코드도 몇 줄 되지 않지만, 위의 링크에 있는 코드를 필사하며 라이브러리 사용 실습을 해보시면 됩니다."
+      ],
+      "metadata": {
+        "id": "9L-jAHPkiBV0"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import spacy\n",
+        "import neuralcoref\n",
+        "\n",
+        "nlp = spacy.load('en_core_web_sm')\n",
+        "neuralcoref.add_to_pipe(nlp)\n",
+        "\n",
+        "text = \"Alex said that he wants to fo his home. Then Peter gave the key of his car to Alex saying that he needs it back on Monday. \"\n",
+        "\n",
+        "doc = nlp(text)\n",
+        "print(doc._.coref_clusters)\n",
+        "print(doc,_.coref_resolved)"
+      ],
+      "metadata": {
+        "id": "Klj6gjETZdgS"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "MsJZ9ldFiARK"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
