@@ -50,14 +50,14 @@
 ## Assignment
   
 
-### **📍 17주차 예습과제 (~10/17)**
+### **📍 17주차 예습과제**
 
 >  `3D human pose estimation in video with temporal convolutions and semi-supervised training` <br>
->  `AN IMAGE IS WORTH 16X16 WORDS: TRANSFORMERS FOR IMAGE RECOGNITION AT SCALE`
+>  `AN IMAGE IS WORTH 16X16 WORDS: TRANSFORMERS FOR IMAGE RECOGNITION AT SCALE`<br>
 >  주어진 논문을 읽고, 요약 및 정리한 내용을 깃허브에 업로드
     (선택) 질문 사항이나 공유하고 싶은 내용은 'Ewha-Euron/2022-2-Euron-CV' issue에 추가
 
-### **📍 17주차 복습과제 (~10/17)**
+### **📍 17주차 복습과제**
 
 > [https://cs231n.github.io/assignments2021/assignment3/](https://cs231n.github.io/assignments2021/assignment3/)의 `Q4: Generative  `Generative_Adversarial_Networks.ipynb` 을 완료하신 후, `.py` 파일로 변환해서 제출해주세요. (모든 cell을 하나의 py 파일에 합쳐주세요) - 파일명: `generative_adversarial_networks.py` 
 
