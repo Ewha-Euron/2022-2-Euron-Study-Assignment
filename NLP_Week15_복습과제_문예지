@@ -1,0 +1,132 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPhPiT9SNyLiZqwanpMSmhv",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Moonyaeji/2022-2-Euron-Study-Assignment/blob/master/week15_.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "kWmcj0W6b3ft"
+      },
+      "outputs": [],
+      "source": [
+        "from transformers import T5Tokenizer, T5ForConditionalGeneration\n",
+        "\n",
+        "tokenizer = T5Tokenizer.from_pretrained(\"t5-small\")\n",
+        "model = T5ForConditionalGeneration.from_pretrained(\"t5-small\")\n",
+        "\n",
+        "input_ids = tokenizer(\"The <extra_id_0> walks in <extra_id_1> park\", return_tensors=\"pt\").input_ids\n",
+        "labels = tokenizer(\"<extra_id_0> cute dog <extra_id_1> the <extra_id_2>\", return_tensors=\"pt\").input_ids\n",
+        "\n",
+        "# the forward function automatically creates the correct decoder_input_ids\n",
+        "loss = model(input_ids=input_ids, labels=labels).loss\n",
+        "loss.item()\n",
+        "\n",
+        "from transformers import T5Tokenizer, T5ForConditionalGeneration\n",
+        "import torch\n",
+        "\n",
+        "tokenizer = T5Tokenizer.from_pretrained(\"t5-small\")\n",
+        "model = T5ForConditionalGeneration.from_pretrained(\"t5-small\")\n",
+        "\n",
+        "# the following 2 hyperparameters are task-specific\n",
+        "max_source_length = 512\n",
+        "max_target_length = 128\n",
+        "\n",
+        "# Suppose we have the following 2 training examples:\n",
+        "input_sequence_1 = \"Welcome to NYC\"\n",
+        "output_sequence_1 = \"Bienvenue à NYC\"\n",
+        "\n",
+        "input_sequence_2 = \"HuggingFace is a company\"\n",
+        "output_sequence_2 = \"HuggingFace est une entreprise\"\n",
+        "\n",
+        "# encode the inputs\n",
+        "task_prefix = \"translate English to French: \"\n",
+        "input_sequences = [input_sequence_1, input_sequence_2]\n",
+        "\n",
+        "encoding = tokenizer(\n",
+        "    [task_prefix + sequence for sequence in input_sequences],\n",
+        "    padding=\"longest\",\n",
+        "    max_length=max_source_length,\n",
+        "    truncation=True,\n",
+        "    return_tensors=\"pt\",\n",
+        ")\n",
+        "\n",
+        "input_ids, attention_mask = encoding.input_ids, encoding.attention_mask\n",
+        "\n",
+        "# encode the targets\n",
+        "target_encoding = tokenizer(\n",
+        "    [output_sequence_1, output_sequence_2],\n",
+        "    padding=\"longest\",\n",
+        "    max_length=max_target_length,\n",
+        "    truncation=True,\n",
+        "    return_tensors=\"pt\",\n",
+        ")\n",
+        "labels = target_encoding.input_ids\n",
+        "\n",
+        "# replace padding token id's of the labels by -100 so it's ignored by the loss\n",
+        "labels[labels == tokenizer.pad_token_id] = -100\n",
+        "\n",
+        "# forward pass\n",
+        "loss = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels).loss\n",
+        "loss.item()\n",
+        "\n",
+        "from transformers import T5Tokenizer, T5ForConditionalGeneration\n",
+        "\n",
+        "tokenizer = T5Tokenizer.from_pretrained(\"t5-small\")\n",
+        "model = T5ForConditionalGeneration.from_pretrained(\"t5-small\")\n",
+        "\n",
+        "task_prefix = \"translate English to German: \"\n",
+        "# use different length sentences to test batching\n",
+        "sentences = [\"The house is wonderful.\", \"I like to work in NYC.\"]\n",
+        "\n",
+        "inputs = tokenizer([task_prefix + sentence for sentence in sentences], return_tensors=\"pt\", padding=True)\n",
+        "\n",
+        "output_sequences = model.generate(\n",
+        "    input_ids=inputs[\"input_ids\"],\n",
+        "    attention_mask=inputs[\"attention_mask\"],\n",
+        "    do_sample=False,  # disable sampling to test if batching affects output\n",
+        ")\n",
+        "\n",
+        "print(tokenizer.batch_decode(output_sequences, skip_special_tokens=True))\n",
+        "\n",
+        "from transformers import T5Tokenizer, T5ForConditionalGeneration\n",
+        "\n",
+        "tokenizer = T5Tokenizer.from_pretrained(\"t5-small\")\n",
+        "model = T5ForConditionalGeneration.from_pretrained(\"t5-small\")\n",
+        "\n",
+        "input_ids = tokenizer(\"The <extra_id_0> walks in <extra_id_1> park\", return_tensors=\"pt\").input_ids\n",
+        "\n",
+        "sequence_ids = model.generate(input_ids)\n",
+        "sequences = tokenizer.batch_decode(sequence_ids)\n",
+        "sequences\n",
+        "\n"
+      ]
+    }
+  ]
+}
+Footer
+© 2022 Gi
