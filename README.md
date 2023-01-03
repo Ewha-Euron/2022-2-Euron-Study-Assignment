@@ -24,7 +24,18 @@
     - 해당 주차 브랜치에 과제 업로드하고 Pull Request, 이때 label은 `NLP` , `예습과제`
     
 ### 📍 복습과제
-  - 이번 주 강의는 NLP의 미래에 대한 개괄적인 강의로, 기술적인 부분이 많이 나오지는 않으므로 복습 과제는 없습니다.
+  - 아래 구글 드라이브에서 ipynb 파일을 다운받아 필사 과제를 진행해주시면 됩니다.
+  - [18주차 BERT 실습](https://drive.google.com/file/d/1LIbn6Gk7LakDlfQEMRg9KnS4c8VyrwP7/view?usp=sharing)
+
+  
+### 복습과제 제출 방법
+  
+> 해당 파일을 `Week_18` branch에 업로드하신 후 해당 `Week_18`  branch에서  `pull request` 를 진행해주세요.
+  
+- 과제 제출 방법
+    - 레포: (origin) username/2022-2-Euron-Study-Assignment
+    - 브랜치: `Week_18`
+    - 해당 주차 브랜치에 과제 업로드하고 Pull Request, 이때 label은 `NLP` , `복습과제`
   
 ## **Due**
 - 18주차 예습과제
