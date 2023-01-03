@@ -1,6 +1,44 @@
 # Euron 3기 예습·복습 과제 제출
 
 <details>
+<summary>CV</summary>
+<div markdown="1">
+
+<br />  
+  
+| 주차 | 내용         | 발표자                       | 발표자료 |
+| ---- | ------------ | ---------------------------- | -------- |
+|  17   |논문스터디    | 고주은, 변규리, 신지연               |[📚] |
+
+
+
+## Assignment
+  
+
+### **📍 18주차 예습과제**
+
+>  Deep Residual Learning for Image Recognition / Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun / https://arxiv.org/abs/1512.03385 <br>
+>  EfficientNet: Rethinking Model Scaling for Convolutional Neural Network / Mingxing Tan, Auoc V.Le / https://arxiv.org/pdf/1905.11946v5.pdf <br>
+>  Beyond a Gaussian Denoiser: Residual Learning of Deep CNN for Image Denoising / Kai Zhang, WangMeng Zuo, Yunjin Chen, Deyu Meng, Lei Zhang / https://arxiv.org/pdf/1608.03981 <br>
+>  주어진 논문을 읽고, 요약 및 정리한 내용을 깃허브에 업로드
+    (선택) 질문 사항이나 공유하고 싶은 내용은 'Ewha-Euron/2022-2-Euron-CV' issue에 추가
+
+>  발표 담당자이신 분들은 발표 자료를 운영자(노원희)님께 제출하는 것으로 과제가 대체됩니다. (발표는 약 10~15분 정도로 준비해주시면 됩니다.)
+   나머지 부원 분들은 기존의 논문 스터디와 동일하게 논문 리뷰를 요약하여 작성한 pdf 혹은 txt 파일을 깃허브 18 Week 브랜치에 제출하시면 됩니다.
+
+### **📍 17주차 복습과제**
+
+> 17주차 부터는 복습과제가 없습니다.
+
+## **Due**
+
+- 18주차 예습과제
+    - **1월 9일**까지 제출합니다.
+
+</div>
+</details>
+
+<details>
 <summary>NLP</summary>
 <div markdown="1">       
 
