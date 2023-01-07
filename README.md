@@ -21,7 +21,7 @@
 >  Focal Loss for Dense Object Detection / Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He, Piotr Dollár / https://arxiv.org/abs/1708.02002 <br>
 >  learning deep features for discriminative localization / Bolei Zhou, Aditya Khosla, Agata Lapedriza, Aude Oliva, Antonio Torralba / https://arxiv.org/pdf/1512.04150.pdf <br>
 >  EfficientNet: Rethinking Model Scaling for Convolutional Neural Network / Mingxing Tan, Auoc V.Le / https://arxiv.org/pdf/1905.11946v5.pdf <br>
->  주어진 논문을 읽고, 요약 및 정리한 내용을 깃허브에 업로드
+>  주어진 논문을 읽고, 요약 및 정리한 내용을 깃허브에 업로드 <br>
     (선택) 질문 사항이나 공유하고 싶은 내용은 'Ewha-Euron/2022-2-Euron-CV' issue에 추가
 
 >  발표 담당자이신 분들은 발표 자료를 운영자(황채원)님께 제출하는 것으로 과제가 대체됩니다. (발표는 약 10~15분 정도로 준비해주시면 됩니다.)
